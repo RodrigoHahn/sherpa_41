@@ -21,7 +21,8 @@ TEST_F(StyleTest, StyledNodeCtorDtor) {
                                                   new DOM::TextNode("")),
                                               PropertyMap(),
                                               StyledNodeVector());
-    delete styledNode;
+
+    ASSERT_NO_THROW(delete styledNode3);
 }
 
 TEST_F(StyleTest, value) {
