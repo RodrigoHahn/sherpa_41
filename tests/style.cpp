@@ -14,6 +14,14 @@ using namespace Style;
 TEST_F(StyleTest, StyledNodeCtorDtor) {
     StyledNode                  styledNode(nullptr);
     std::unique_ptr<StyledNode> snuptr(new StyledNode(nullptr));
+    StyledNode                  styledNode2(DOM::NodePtr(new DOM::TextNode("")),
+                           PropertyMap(),
+                           StyledNodeVector());
+    StyledNode *                styledNode3 = new StyledNode(DOM::NodePtr(
+                                                  new DOM::TextNode("")),
+                                              PropertyMap(),
+                                              StyledNodeVector());
+    delete styledNode;
 }
 
 TEST_F(StyleTest, value) {

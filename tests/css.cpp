@@ -18,6 +18,13 @@ TEST_F(CSSTest, ValueCtorDtor) {
     ValuePtr   text3  = ValuePtr(new TextValue("txt"));
     ValuePtr   unit3  = ValuePtr(new UnitValue(1.0, px));
     ValuePtr   color3 = ValuePtr(new ColorValue(0, 0, 0, 0));
+    Value *    text4  = new TextValue("txt");
+    Value *    unit4  = new UnitValue(1.0, px);
+    Value *    color4 = new ColorValue(0, 0, 0, 0);
+
+    ASSERT_NO_THROW(delete text4);
+    ASSERT_NO_THROW(delete unit4);
+    ASSERT_NO_THROW(delete color4);
 }
 
 TEST_F(CSSTest, makeValue) {
