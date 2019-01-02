@@ -4,7 +4,7 @@ matrix:
   include:
 
     # Coverage
-    
+
     - os: linux
       compiler: gcc
       addons:
@@ -16,7 +16,7 @@ matrix:
       after_success:
         - coveralls --root . -e tests -e lib -E ".*CMakeFiles.*"
       env:
-        - MATRIX_EVAL="CMAKE_OPTIONS=-DCOVERAGE=ON && CC=gcc-8 && CXX=g++-8"
+        - MATRIX_EVAL="CMAKE_OPTIONS=-DCOVERAGE=ON && CC=gcc-7 && CXX=g++-7"
 
     # macOS : clang
 
