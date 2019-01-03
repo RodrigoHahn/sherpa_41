@@ -43,10 +43,35 @@ set(APP_FILES
     src/main.cpp
 )
 
+# set compile flags
+if (MSVC)
+    set(PROJ_COMPILE_OPTS /std:c++17 /W4 /WX)
+
+    set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /Ox")
+    set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} /Od")
+
+    # VS 2017 removed tr1
+    add_definitions(-DGTEST_HAS_TR1_TUPLE=0)
+else()
+    set(PROJ_COMPILE_OPTS -std=c++17 -Wall -Werror -Wextra -pedantic -pedantic-errors -g)
+    set(EXEC_COMPILE_OPTS -Wno-keyword-macro) # Magick++ issue
+endif()
+
+# sherpa_41 executable
+if (EXECUTABLE)
+    add_executable(${PROJECT_NAME} ${SOURCE_FILES} ${APP_FILES})
+    add_definitions( -DMAGICKCORE_QUANTUM_DEPTH=16 )
+    add_definitions( -DMAGICKCORE_HDRI_ENABLE=0 )
+    find_package(ImageMagick COMPONENTS Magick++)
+    include_directories(${ImageMagick_INCLUDE_DIRS})
+    target_compile_options(${PROJECT_NAME} PRIVATE ${CMAKE_CXX_FLAGS} ${PROJ_COMPILE_OPTS} ${EXEC_COMPILE_OPTS})
+    target_link_libraries(${PROJECT_NAME} ${ImageMagick_LIBRARIES})
+endif()
+
 # tests
 find_package(Threads)
 add_executable(${PROJECT_NAME}-test ${SOURCE_FILES} ${TEST_FILES})
-target_compile_options(${PROJECT_NAME}-test PRIVATE ${CMAKE_CXX_FLAGS} -Wall -Werror -Wextra -pedantic -pedantic-errors -g)
+target_compile_options(${PROJECT_NAME}-test PRIVATE ${CMAKE_CXX_FLAGS} ${PROJ_COMPILE_OPTS})
 target_link_libraries(${PROJECT_NAME}-test PRIVATE gtest ${CMAKE_THREAD_LIBS_INIT})
 
 # coverage
@@ -54,14 +79,3 @@ if (COVERAGE)
     target_compile_options(${PROJECT_NAME}-test PRIVATE --coverage)
     target_link_libraries(${PROJECT_NAME}-test PRIVATE --coverage)
 endif ()
-
-if (EXECUTABLE)
-    # sherpa_41 executable
-    add_executable(${PROJECT_NAME} ${SOURCE_FILES} ${APP_FILES})
-    add_definitions( -DMAGICKCORE_QUANTUM_DEPTH=16 )
-    add_definitions( -DMAGICKCORE_HDRI_ENABLE=0 )
-    find_package(ImageMagick COMPONENTS Magick++)
-    include_directories(${ImageMagick_INCLUDE_DIRS})
-    target_compile_options(${PROJECT_NAME} PRIVATE ${CMAKE_CXX_FLAGS} -std=c++17)
-    target_link_libraries(${PROJECT_NAME} ${ImageMagick_LIBRARIES})
-endif()
