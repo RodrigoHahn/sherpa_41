@@ -67,7 +67,7 @@ For hacking on sherpa, please see the [development notes](#development-notes) be
 
 ### Notes
 
-- There is no GUI renderer (yet?!). Until one is made, the front-end is really just an image. But a cool, nicely-rendered image, becuase sherpa has awesome renderers.
+- There is no GUI renderer (yet?!). Until one is made, the front-end is really just an image. But a cool, nicely-rendered image, because sherpa has awesome renderers.
 
 - JavaScript is turned off by default, and can't be turned on. You may say JavaScript is unsupported. I say you're right.
 
