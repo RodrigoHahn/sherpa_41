@@ -15,7 +15,7 @@
 `sherpa_41` is a toy browser engine, based somewhat on [Limpet's _Let's build a browser engine!_](https://limpet.net/mbrubeck/2014/08/08/toy-layout-engine-1.html)
 with architectures introduced in [CS3251](https://vuse-cs3251.github.io).
 
-This app is meant to be expolartive in nature, with particular [design philosophies](#a-brief-overview-of-sherpa_41s-design) that make use of modern `C++` and established design patterns to create an engine that is easy to understand and extend. Note, however, that the engine is ___not___ designed to be especially robust, or even useful.
+This app is meant to be explorative in nature, with particular [design philosophies](#a-brief-overview-of-sherpa_41s-design) that make use of modern `C++` and established design patterns to create an engine that is easy to understand and extend. Note, however, that the engine is ___not___ designed to be especially robust, or even useful.
 
 ### Usage
 
